@@ -100,7 +100,7 @@ style:
 [FOR LOOP](a "
 ...(questions[_question_index]['answers'] as List<String>).map((answer) {
   return Answer(_answerQuestion, answer);
- })
+ }).toList()
 ")
 ```
 for (var answer in (questions[_question_index]['answers']))
