@@ -64,7 +64,8 @@ Container([width](a "double.infinity"), [margin](a "EdgeInsets.all(10)"), child)
 Text('', [style](a "TextStyle(fontSize: 36, fontWeight: FontWeight.bold)"), [textAlign](a "TextAlign.center"))
 
 ***
-ElevatedButton(child, onPressed, [style](a "ElevatedButton.styleFrom (
+ElevatedButton(child, onPressed, [style](a "
+ElevatedButton.styleFrom (
   primary: Colors.blue,
   onPrimary: Colors.white,
 )
@@ -72,9 +73,11 @@ OLD:
 style: ButtonStyle(
   backgroundColor: StateProperty.all(Colors.blue),
   foregroundColor,
-)"))
+)
+"))
 
-TextButton(child, onPressed, [style](a "TextButton.styleFrom (
+TextButton(child, onPressed, [style](a "
+TextButton.styleFrom (
   primary: Colors.blue,
   onSurface: Colors.red,
 )
@@ -82,7 +85,8 @@ OLD:
 style: ButtonStyle(
   backgroundColor: StateProperty.all(Colors.blue),
   foregroundColor,
-)"))
+)
+"))
 
 OutlinedButton(child, onPressed, [style](a "OutlinedButton.styleFrom (
   side: BorderSide(color: Colors.orange,)
