@@ -70,8 +70,8 @@ ElevatedButton.styleFrom (
   onPrimary: Colors.white,
 )
 OLD:
-style: ButtonStyle(
-  backgroundColor: StateProperty.all(Colors.blue),
+ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(Colors.blue),
   foregroundColor,
 )
 "))
@@ -82,22 +82,22 @@ TextButton.styleFrom (
   onSurface: Colors.red,
 )
 OLD:
-style: ButtonStyle(
-  backgroundColor: StateProperty.all(Colors.blue),
+ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(Colors.blue),
   foregroundColor,
 )
 "))
 
-OutlinedButton(child, onPressed, [style](a "OutlinedButton.styleFrom (
-  side: BorderSide(color: Colors.orange,)
+OutlinedButton(child, onPressed, [style](a "
+OutlinedButton.styleFrom (
+  primary: Colors.blue,
+  side: BorderSide(color: Colors.orange),
 )
 OLD:
-style:
-  ButtonStyle(
-    backgroundColor: StateProperty.all(Colors.blue),
-    foregroundColor,
-  ),
-  BorderStyle(side)
+ButtonStyle(
+  backgroundColor: MaterialStateProperty.all(Colors.blue),
+  side: MaterialStateProperty.all(const BorderSide(color: Colors.red)),
+),
 "))
 
 ***
