@@ -110,3 +110,26 @@ ButtonStyle(
 for (var answer in (questions[_question_index]['answers']))
   Answer(answer, _getNextQuestion),
 ``` 
+
+Bottom Navigation
+```
+bottomNavigationBar: BottomNavigationBar(
+  selectedItemColor: Theme.of(context).textSelectionTheme.selectionColor,
+  currentIndex: _selectedIndex,
+  onTap: _onItemTapped,
+  items: <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.card_giftcard),
+      label: 'Card',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.card_giftcard),
+      label: 'Card2',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.card_giftcard),
+      label: 'Card3',
+    ),
+  ],
+)
+```
