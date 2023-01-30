@@ -1,4 +1,4 @@
-flutter create
+flutter create // --template=module/package/plugin --platforms=web,android,ios
 flutter run
 flutter packages get
 
