@@ -1,0 +1,69 @@
+flutter create
+flutter run
+flutter packages get
+
+.toString()
+@required
+
+STATELESS
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {}
+
+STATEFUL (setState)
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+    @override
+  Widget build(BuildContext context) {
+  }
+}
+
+
+
+MaterialApp(home)
+Scaffold(appBar, body)
+
+AppBar(title)
+
+Column/Row(children[])
+Center(child)
+--------------------
+
+Text()
+ElevatedButton(child, onPressed, style), TextButton, OutlinedButton
+TexstButton
+OutlinedButton
+
+NEW
+style: ...Button.styleFrom(primary: Colors.blue, onPrimary: Colors.white, side: BorderSide(color: Colors.orange))
+
+OLD
+style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)
+	   ButtonStyle(backgroundColor: StateProperty.all(Colors.blue), foregroundColor, )
+	   BorderStyle(side)
+--------------------
+
+NEW
+for (var answer in (questions[_question_index]['answers']))
+  Answer(answer, _getNextQuestion),
+  
+OLD
+...(questions[_question_index]['answers'] as List<String>)
+	.map((answer) {
+  return Answer(_answerQuestion, answer);
+}).toList()
+
+...(questions[_question_index]['answers'] as List<String>)
+	.map((answer) => Answer(_answerQuestion, answer))
+	.toList()
+--------------------
+  
+ 
