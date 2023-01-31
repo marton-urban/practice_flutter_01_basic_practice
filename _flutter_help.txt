@@ -25,29 +25,6 @@ debugShowCheckedModeBanner: false
 .toString()
 @required
 
-STATELESS
-void main() => runApp(MyApp());
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {}
-
-STATEFUL (setState)
-class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return MyAppState();
-  }
-}
-
-class MyAppState extends State<MyApp> {
-    @override
-  Widget build(BuildContext context) {
-  }
-}
-
-
-
 MaterialApp(home)
 Scaffold(appBar, body)
 
