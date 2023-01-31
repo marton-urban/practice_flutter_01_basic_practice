@@ -5,6 +5,8 @@ flutter packages get
 flutter pub add/remove [package]
 flutter pub get
 
+flutter pub upgrade --major-versions
+
 flutter:
  uses-material-design: true
  assets:
