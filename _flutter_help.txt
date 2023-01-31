@@ -1,9 +1,26 @@
-flutter create // --template=module/package/plugin --platforms=web,android,ios
+flutter create // --template=module/package/plugin/skeleton --platforms=web,android,ios
 flutter run
 flutter packages get
 
+flutter pub add/remove [package]
+flutter pub get
+
+flutter:
+ uses-material-design: true
+ assets:
+ - assets/images/  // Image.asset('images/green-tile.png')
+ - assets/example.json // use AssetBundle object
+ 
+dependencies:
+ flutter:
+ sdk: flutter
+ cupertino_icons: ^1.0.2
+ google_fonts: 2.2.0
+
 debugShowMaterialGrid: false,
 debugShowCheckedModeBanner: false
+
+--------------------------------------------------
 
 .toString()
 @required
