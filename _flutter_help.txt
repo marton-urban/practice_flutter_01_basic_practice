@@ -67,3 +67,19 @@ OLD
   
 SingleChildScrollView to prevent Overflow error (?)
 RichText>>TextSpan
+
+--------------------
+PLATFORMS SPECIFIC
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+bool get isMobileDevice => !kIsWeb && (Platform.isIOS || Platform.isAndroid);
+bool get isDesktopDevice => !kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux);
+bool get isMobileDeviceOrWeb => kIsWeb || isMobileDevice;
+bool get isDesktopDeviceOrWeb => kIsWeb || isDesktopDevice;
+bool get isAndroid => !kIsWeb && Platform.isAndroid;
+bool get isFuchsia => !kIsWeb && Platform.isFuchsia;
+bool get isIOS => !kIsWeb && Platform.isIOS;
+bool get isLinux => !kIsWeb && Platform.isLinux;
+bool get isMacOS => !kIsWeb && Platform.isMacOS;
+bool get isWindows => !kIsWeb && Platform.isWindows;
