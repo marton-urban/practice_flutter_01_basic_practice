@@ -67,6 +67,7 @@ OLD
   
 SingleChildScrollView to prevent Overflow error (?)
 RichText>>TextSpan
+Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly)
 
 --------------------
 PLATFORMS SPECIFIC
