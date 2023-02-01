@@ -66,3 +66,4 @@ OLD
 --------------------
   
 SingleChildScrollView to prevent Overflow error (?)
+RichText>>TextSpan
