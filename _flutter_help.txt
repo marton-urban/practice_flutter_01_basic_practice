@@ -3,6 +3,7 @@ flutter run
 flutter packages get
 
 flutter pub add/remove [package]
+flutter clean
 flutter pub get
 
 flutter pub upgrade --major-versions
