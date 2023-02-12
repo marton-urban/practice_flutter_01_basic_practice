@@ -8,10 +8,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Code Sample for Navigator',
-      initialRoute: '/choose_credentials/personal_info',
+      initialRoute: '/personal_info',
       routes: <String, WidgetBuilder>{
         '/': (BuildContext context) => const HomePage(),
-        '/choose_credentials/personal_info': (BuildContext context) =>
+        '/personal_info': (BuildContext context) =>
             const CollectPersonalInfoPage(),
         '/choose_credentials': (BuildContext context) =>
             const ChooseCredentialsPage(),
