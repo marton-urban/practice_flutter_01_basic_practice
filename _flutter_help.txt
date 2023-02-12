@@ -9,7 +9,9 @@ flutter pub upgrade --major-versions
 flutter pub pub cache repair
 
 adb tcpip 5555
+adb shell ip -f inet addr show wlan0
 adb connect ip:5555
+adb usb
 
 flutter:
  uses-material-design: true
