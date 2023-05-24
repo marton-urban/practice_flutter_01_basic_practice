@@ -8,9 +8,12 @@ flutter pub get
 flutter pub upgrade --major-versions
 flutter pub pub cache repair
 
+cd android
+./gradlew --refresh-dependencies
+
 adb tcpip 5555
 adb shell ip -f inet addr show wlan0
-adb connect ip:5555
+adb connect 192.168.0.103
 adb usb
 
 flutter:
