@@ -59,34 +59,36 @@ class CollectPersonalInfoPage extends StatelessWidget {
   const CollectPersonalInfoPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: Theme.of(context).textTheme.headlineMedium!,
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Name: Max, Address: Fury Road",
-              style: TextStyle(fontSize: 20, color: Colors.black87),
-            ),
-            const SizedBox(height: 10.0),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context)
-                    .pushReplacementNamed('/choose_credentials');
-              },
-              child: const SizedBox(
-                child: Text(
-                  'Link: Page',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline),
+    return SafeArea(
+      child: DefaultTextStyle(
+        style: Theme.of(context).textTheme.headlineMedium!,
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Name: Max, Address: Fury Road",
+                style: TextStyle(fontSize: 20, color: Colors.black87),
+              ),
+              const SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed('/choose_credentials');
+                },
+                child: const SizedBox(
+                  child: Text(
+                    'Link: Page',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
