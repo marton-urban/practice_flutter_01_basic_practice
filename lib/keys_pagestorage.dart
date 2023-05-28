@@ -393,32 +393,32 @@ class _PersistPageStoragePageState extends State<PersistPageStoragePage> {
   }
 
   @override
-  Widget build(BuildContext context) => PageStorage(
-        bucket: bucketGlobal,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text(MyApp.title),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.navigate_next),
-                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PersistPageStoragePage(),
-                )),
-              ),
-            ],
-          ),
-          body: buildPageOne(),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text(MyApp.title),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.navigate_next),
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PersistPageStoragePage(),
+              )),
+            ),
+          ],
         ),
+        body: buildPageOne(),
       );
 
-  Widget buildPageOne() => ListView.builder(
-        key: const PageStorageKey<String>('pageOne'),
-        itemCount: 40,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(
-            'List item ${index + 1}',
-            style: const TextStyle(fontSize: 24),
+  Widget buildPageOne() => PageStorage(
+        bucket: bucketGlobal,
+        child: ListView.builder(
+          key: const PageStorageKey<String>('pageOne'),
+          itemCount: 40,
+          itemBuilder: (context, index) => ListTile(
+            title: Text(
+              'List item ${index + 1}',
+              style: const TextStyle(fontSize: 24),
+            ),
           ),
         ),
       );
