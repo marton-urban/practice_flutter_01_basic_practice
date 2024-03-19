@@ -41,7 +41,8 @@ class ChooseCredentialsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushReplacementNamed('/');
+        Navigator.of(context).pushReplacementNamed(
+            '/'); // .pop() is jó, mert a navigator betölti a '/'-t app indításkor alapból a memóriába
       },
       child: DefaultTextStyle(
         style: Theme.of(context).textTheme.headlineMedium!,

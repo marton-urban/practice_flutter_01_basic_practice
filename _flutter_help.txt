@@ -1,3 +1,6 @@
+pub: Shimmer, RxDart
+vscode ext: Dart Data Class Generator (copyWith, toString, equality etc.)
+
 flutter create // --template=module/package/plugin/skeleton --platforms=web,android,ios
 flutter run
 flutter packages get
