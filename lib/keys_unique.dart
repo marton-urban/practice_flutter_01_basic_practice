@@ -55,9 +55,9 @@ class ColorStateWidget extends StatefulWidget {
   final String text;
 
   const ColorStateWidget({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   ColorStateWidgetState createState() => ColorStateWidgetState();

@@ -75,9 +75,9 @@ class UserWidget extends StatefulWidget {
   final User user;
 
   const UserWidget({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   @override
   createState() => _UserWidgetState();

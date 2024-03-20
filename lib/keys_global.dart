@@ -28,7 +28,7 @@ class BasicKeyPage extends StatelessWidget {
 }
 
 class CounterWidget extends StatefulWidget {
-  const CounterWidget({Key? key}) : super(key: key);
+  const CounterWidget({super.key});
 
   @override
   createState() => _CounterWidgetState();
