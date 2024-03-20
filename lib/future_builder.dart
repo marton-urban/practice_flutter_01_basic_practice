@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
     int randomNumber = (body as List).first;
     return randomNumber;
     // return null;
-    // throw UnimplementedError();
+    // throw 'An error';
   }
 
   @override
@@ -53,11 +53,9 @@ class _MainPageState extends State<MainPage> {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasError) {
-                    final error = snapshot.error;
-                    return Text('🥺$error');
+                    return Text('🥺${snapshot.error}');
                   } else if (snapshot.hasData) {
-                    int? data = snapshot.data;
-                    return Text('✅ $data');
+                    return Text('✅ ${snapshot.data}');
                   } else {
                     return const Text('No data');
                   }
