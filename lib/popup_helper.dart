@@ -59,49 +59,27 @@ class _MainPageState extends State<MainPage> {
 
   Future openDialog() => showDialog(
       context: context,
-      builder: (context) => DialogWidget(
-          isChecked: isChecked, refreshMainCheckbox: refreshCheckboxState));
-}
-
-class DialogWidget extends StatefulWidget {
-  const DialogWidget(
-      {super.key, required this.refreshMainCheckbox, required this.isChecked});
-
-  final void Function(bool?) refreshMainCheckbox;
-  final bool isChecked;
-
-  @override
-  State<DialogWidget> createState() => _DialogWidgetState();
-}
-
-class _DialogWidgetState extends State<DialogWidget> {
-  late bool isChecked;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.isChecked;
-  }
-
-  @override
-  Widget build(BuildContext context) => AlertDialog(
-          alignment: Alignment.topCenter,
-          title: const Text('SetState In Dialog?'),
-          content: CheckboxListTile(
-              controlAffinity: ListTileControlAffinity.leading,
-              title: Text(
-                isChecked ? 'Yes' : 'No',
-                style: const TextStyle(fontSize: 24),
-              ),
-              value: isChecked,
-              onChanged: (newValue) {
-                setState(() => isChecked = newValue!);
-                widget.refreshMainCheckbox(newValue);
-              }),
-          actions: [
-            TextButton(
-              child: const Text('SUBMIT'),
-              onPressed: () => Navigator.of(context).pop(),
-            )
-          ]);
+      // need StatefulBuilder for setState2
+      builder: (context) => StatefulBuilder(builder: (context, setState2) {
+            return AlertDialog(
+                alignment: Alignment.topCenter,
+                title: const Text('SetState In Dialog?'),
+                content: CheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: Text(
+                      isChecked ? 'Yes' : 'No',
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                    value: isChecked,
+                    onChanged: (newValue) {
+                      setState2(() => isChecked = newValue!);
+                      setState(() => {});
+                    }),
+                actions: [
+                  TextButton(
+                    child: const Text('SUBMIT'),
+                    onPressed: () => Navigator.of(context).pop(),
+                  )
+                ]);
+          }));
 }
