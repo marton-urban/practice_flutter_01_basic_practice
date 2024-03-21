@@ -5,6 +5,8 @@ void main() {
 }
 
 class BasicKeyPage extends StatelessWidget {
+  // only works because _CouterWidgetState is in same file
+  // global key preconditions: stateful widget + state class is public
   final keyCounter = GlobalKey<_CounterWidgetState>();
 
   @override
