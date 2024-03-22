@@ -77,6 +77,8 @@ class DialogWidget extends StatefulWidget {
 class _DialogWidgetState extends State<DialogWidget> {
   late bool isChecked;
 
+  // this is actually not needed, instead replace above with:
+  // late bool isChecked = widget.isChecked;
   @override
   void initState() {
     super.initState();
