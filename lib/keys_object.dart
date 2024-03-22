@@ -126,6 +126,9 @@ class User {
     required this.country,
   });
 
+  // Another video: https://youtu.be/-F_5yHm_Zso?si=escK47GI_zQUofXn&t=299
+  // == must be overriden
+
   // @override
   // bool operator ==(Object other) =>
   //     identical(this, other) ||
