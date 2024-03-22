@@ -129,7 +129,7 @@ class User {
   });
 
   // Another video: https://youtu.be/-F_5yHm_Zso?si=escK47GI_zQUofXn&t=299
-  // == must be overriden
+  // == must be overriden, but here if you don't override hashcode will be different, and even ValueKey(user) will work.
 
   // @override
   // bool operator ==(Object other) =>
