@@ -1,0 +1,98 @@
+pub: Shimmer, RxDart
+vscode ext: Dart Data Class Generator (copyWith, toString, equality etc.)
+
+flutter create // --template=module/package/plugin/skeleton --platforms=web,android,ios
+flutter run
+flutter packages get
+
+flutter pub add/remove [package]
+flutter clean
+flutter pub get
+flutter pub upgrade --major-versions
+flutter pub pub cache repair
+
+cd android
+./gradlew --refresh-dependencies
+
+adb tcpip 5555
+adb shell ip -f inet addr show wlan0
+adb connect 192.168.0.103
+adb usb
+
+flutter:
+ uses-material-design: true
+ assets:
+ - assets/images/  // Image.asset('images/green-tile.png')
+ - assets/example.json // use AssetBundle object
+ 
+dependencies:
+ flutter:
+ sdk: flutter
+ cupertino_icons: ^1.0.2
+ google_fonts: 2.2.0
+
+debugShowMaterialGrid: false,
+debugShowCheckedModeBanner: false
+
+--------------------------------------------------
+
+.toString()
+@required
+
+MaterialApp(home)
+Scaffold(appBar, body)
+
+AppBar(title)
+
+Column/Row(children[])
+Center(child)
+--------------------
+
+Text()
+ElevatedButton(child, onPressed, style), TextButton, OutlinedButton
+TexstButton
+OutlinedButton
+
+NEW
+style: ...Button.styleFrom(primary: Colors.blue, onPrimary: Colors.white, side: BorderSide(color: Colors.orange))
+
+OLD
+style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)
+	   ButtonStyle(backgroundColor: StateProperty.all(Colors.blue), foregroundColor, )
+	   BorderStyle(side)
+--------------------
+
+NEW
+for (var answer in (questions[_question_index]['answers']))
+  Answer(answer, _getNextQuestion),
+  
+OLD
+...(questions[_question_index]['answers'] as List<String>)
+	.map((answer) {
+  return Answer(_answerQuestion, answer);
+}).toList()
+
+...(questions[_question_index]['answers'] as List<String>)
+	.map((answer) => Answer(_answerQuestion, answer))
+	.toList()
+--------------------
+  
+SingleChildScrollView to prevent Overflow error (?)
+RichText>>TextSpan
+Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly)
+
+--------------------
+PLATFORMS SPECIFIC
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+bool get isMobileDevice => !kIsWeb && (Platform.isIOS || Platform.isAndroid);
+bool get isDesktopDevice => !kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux);
+bool get isMobileDeviceOrWeb => kIsWeb || isMobileDevice;
+bool get isDesktopDeviceOrWeb => kIsWeb || isDesktopDevice;
+bool get isAndroid => !kIsWeb && Platform.isAndroid;
+bool get isFuchsia => !kIsWeb && Platform.isFuchsia;
+bool get isIOS => !kIsWeb && Platform.isIOS;
+bool get isLinux => !kIsWeb && Platform.isLinux;
+bool get isMacOS => !kIsWeb && Platform.isMacOS;
+bool get isWindows => !kIsWeb && Platform.isWindows;
