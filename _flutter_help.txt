@@ -1,3 +1,164 @@
+--------
+RIVERPOD
+--------
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/riverpod_annotation.dart';
+
+riverpodPart (Flutter Riverpod Snippets)
+
+riverpodClass
+
+riverpod
+String autoDisposeHello(AutoDisposeHelloRef ref) => 'Hello';
+riverpodKeepAlive
+String hello(HelloRef ref => 'Hello';
+riverpodKeepAlive
+String familyHello(FamilyHelloRef ref, String name) => return 'Hello $name';  // don't use name
+
+riverpodFuture/riverpodStream
+
+riverpodAsyncClass (manually change to async)
+-------
+FREEZED
+-------
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+
+ptf (part 'person.freezed.dart';)
+
+fdataclass (@freezed DataClass) (const factory, no need to add final to fields)
+
+funion (now sealed class)
+@unfreezed (delete const, need to add final if needed to fields)
+@Freezed(makeCollectionsUnmodifiable: false)
+
+dart run build_runner watch -d
+--------------
+FREEZED + Json
+--------------
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+
+ptf (part 'person.freezed.dart';)
+pts (part 'person.g.dart';)
+fromJson // this is actually from freezed?
+
+fdataclass (@freezed DataClass) (const factory, no need to add final to fields)
+
+@JsonSerializable(explicitToJson: true)
+
+In list of parameters:
+@JsonKey(name: 'parking_lot_capacity') int? parkingLotCapacity (to use camel case)
+@Default([]) List<Review> reviews (normally factory doesn't allow def value?)
+-------------
+Riverpod INIT
+-------------
+dependencies:
+	flutter_riverpod
+	riverpod_annotation
+dev:
+	build_runner
+	custom_lint
+	riverpod_generator
+	riverpod_lint
+	
+analysis_options.yaml
+linter:
+  rules:
+    avoid_print: false
+analyzer:
+  plugins:
+    - custom_lint
+  exclude:
+	- '**/*.g.dart'
+	
+dart run build_runner watch -d
+---------------------
+Riverpod+Freezed INIT
+---------------------
+dependencies:
+	flutter_riverpod
+	riverpod_annotation
+	freezed_annotation
+dev:
+	build_runner
+	custom_lint
+	riverpod_generator
+	riverpod_lint
+	freezed
+	
+analysis_options.yaml
+linter:
+  rules:
+    avoid_print: false
+analyzer:
+  plugins:
+    - custom_lint
+  exclude:
+    - '**/*.freezed.dart'
+	- '**/*.g.dart'
+
+dart run build_runner watch -d
+---------------------
+Riverpod+Freezed+Json INIT
+---------------------
+dependencies:
+	flutter_riverpod
+	riverpod_annotation
+	freezed_annotation
+	json_annotation
+dev:
+	build_runner
+	custom_lint
+	riverpod_generator
+	riverpod_lint
+	freezed
+	json_serializable
+
+analysis_options.yaml
+linter:
+  rules:
+    avoid_print: false
+analyzer:
+  errors:
+    invalid_annotation_target: ignore // only for json_serializable
+  exclude:
+    - '**/*.freezed.dart'
+	- '**/*.g.dart'
+	
+dart run build_runnder build --delete-conflicting-outputs
+dart run build_runner watch -d
+------------------
+FLUTTER APPRENTICE
+------------------
+107: final textTheme = Theme.of(context).textTheme.apply(displayColor:Theme.of(context).colorScheme.onSurface);
+IndexedStack with Bottomnav:
+      body: IndexedStack(
+        index: tab,
+        children: pages,
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: tab,
+        onDestinationSelected: (index) {
+          setState(() {
+            tab = index;
+          });
+        },
+        destinations: appBarDestinations, // List<NavigationDestination> (icon/label/selecctedIcon)
+      ),
+	  
+Listview shrinkWrap, primary, NeverScrollableScrollPhysics
+CustomScrollView: eg collapse your navigation header on scroll
+PageView: scrolls page by page
+SliverAppBar (flexiblespace: FlexibleSpaceBar(background: Center(child: Stack)))
+SliverToBoxAdapter
+GridView.builder (gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: columns))
+Stack (fit: StackFit.expand)
+flutter_secure_storage plugin instead of shared prefs
+
+--------------
+INITIALIZATION
+--------------
 pub: Shimmer, RxDart
 vscode ext: Dart Data Class Generator (copyWith, toString, equality etc.)
 
@@ -34,55 +195,16 @@ dependencies:
 debugShowMaterialGrid: false,
 debugShowCheckedModeBanner: false
 
---------------------------------------------------
-
-.toString()
-@required
-
-MaterialApp(home)
-Scaffold(appBar, body)
-
-AppBar(title)
-
-Column/Row(children[])
-Center(child)
---------------------
-
-Text()
-ElevatedButton(child, onPressed, style), TextButton, OutlinedButton
-TexstButton
-OutlinedButton
-
-NEW
-style: ...Button.styleFrom(primary: Colors.blue, onPrimary: Colors.white, side: BorderSide(color: Colors.orange))
-
-OLD
-style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)
-	   ButtonStyle(backgroundColor: StateProperty.all(Colors.blue), foregroundColor, )
-	   BorderStyle(side)
---------------------
-
-NEW
-for (var answer in (questions[_question_index]['answers']))
-  Answer(answer, _getNextQuestion),
-  
-OLD
-...(questions[_question_index]['answers'] as List<String>)
-	.map((answer) {
-  return Answer(_answerQuestion, answer);
-}).toList()
-
-...(questions[_question_index]['answers'] as List<String>)
-	.map((answer) => Answer(_answerQuestion, answer))
-	.toList()
---------------------
-  
+------
+OTHERS
+------
 SingleChildScrollView to prevent Overflow error (?)
 RichText>>TextSpan
 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly)
 
---------------------
+------------------
 PLATFORMS SPECIFIC
+------------------
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 
