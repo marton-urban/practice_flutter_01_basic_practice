@@ -50,42 +50,18 @@ fdataclass (@freezed DataClass) (const factory, no need to add final to fields)
 In list of parameters:
 @JsonKey(name: 'parking_lot_capacity') int? parkingLotCapacity (to use camel case)
 @Default([]) List<Review> reviews (normally factory doesn't allow def value?)
--------------
-Riverpod INIT
--------------
-dependencies:
-	flutter_riverpod
-	riverpod_annotation
-dev:
-	build_runner
-	custom_lint
-	riverpod_generator
-	riverpod_lint
-	
-analysis_options.yaml
-linter:
-  rules:
-    avoid_print: false
-analyzer:
-  plugins:
-    - custom_lint
-  exclude:
-	- '**/*.g.dart'
-	
-dart run build_runner watch -d
 ---------------------
 Riverpod+Freezed INIT
 ---------------------
-dependencies:
-	flutter_riverpod
-	riverpod_annotation
-	freezed_annotation
-dev:
-	build_runner
-	custom_lint
-	riverpod_generator
-	riverpod_lint
-	freezed
+equatable package?
+flutter pub add flutter_riverpod
+flutter pub add riverpod_annotation
+flutter pub add dev:custom_lint
+flutter pub add dev:riverpod_generator
+flutter pub add dev:riverpod_lint
+flutter pub add freezed_annotation
+flutter pub add dev:freezed
+flutter pub add dev:build_runner
 	
 analysis_options.yaml
 linter:
@@ -96,24 +72,51 @@ analyzer:
     - custom_lint
   exclude:
     - '**/*.freezed.dart'
-	- '**/*.g.dart'
+    - '**/*.g.dart'
 
 dart run build_runner watch -d
----------------------
-Riverpod+Freezed+Json INIT
----------------------
+-------------
+Riverpod INIT
+-------------
+flutter pub add flutter_riverpod
+flutter pub add riverpod_annotation
+flutter pub add dev:custom_lint
+flutter pub add dev:riverpod_generator
+flutter pub add dev:riverpod_lint
+flutter pub add dev:build_runner
 dependencies:
 	flutter_riverpod
 	riverpod_annotation
-	freezed_annotation
-	json_annotation
 dev:
 	build_runner
 	custom_lint
 	riverpod_generator
 	riverpod_lint
-	freezed
-	json_serializable
+	
+analysis_options.yaml
+linter:
+  rules:
+    avoid_print: false
+analyzer:
+  plugins:
+    - custom_lint
+  exclude:
+    - '**/*.g.dart'
+	
+dart run build_runner watch -d
+---------------------
+Riverpod+Freezed+Json INIT
+---------------------
+flutter pub add flutter_riverpod
+flutter pub add riverpod_annotation
+flutter pub add dev:custom_lint
+flutter pub add dev:riverpod_generator
+flutter pub add dev:riverpod_lint
+flutter pub add freezed_annotation
+flutter pub add dev:freezed
+flutter pub add json_annotation
+flutter pub add dev:json_serializable
+flutter pub add dev:build_runner
 
 analysis_options.yaml
 linter:
@@ -124,7 +127,7 @@ analyzer:
     invalid_annotation_target: ignore // only for json_serializable
   exclude:
     - '**/*.freezed.dart'
-	- '**/*.g.dart'
+    - '**/*.g.dart'
 	
 dart run build_runnder build --delete-conflicting-outputs
 dart run build_runner watch -d
@@ -160,7 +163,7 @@ flutter_secure_storage plugin instead of shared prefs
 INITIALIZATION
 --------------
 pub: Shimmer, RxDart
-vscode ext: Dart Data Class Generator (copyWith, toString, equality etc.)
+vscode ext: Dart Data Class Generator (copyWith, toString, equality etc. - vscode settings: use Equatable)
 
 flutter create // --template=module/package/plugin/skeleton --platforms=web,android,ios
 flutter run
