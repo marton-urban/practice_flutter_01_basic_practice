@@ -2,13 +2,14 @@
 RIVERPOD
 --------
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod/riverpod_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 riverpodPart (Flutter Riverpod Snippets)
 
 riverpodClass
+riverpodAsyncClass (manually change to async)
 
-riverpod
+riverpod (simple provider, an autodispose one)
 String autoDisposeHello(AutoDisposeHelloRef ref) => 'Hello';
 riverpodKeepAlive
 String hello(HelloRef ref => 'Hello';
@@ -16,8 +17,6 @@ riverpodKeepAlive
 String familyHello(FamilyHelloRef ref, String name) => return 'Hello $name';  // don't use name
 
 riverpodFuture/riverpodStream
-
-riverpodAsyncClass (manually change to async)
 -------
 FREEZED
 -------
@@ -75,6 +74,35 @@ analyzer:
     - '**/*.g.dart'
 
 dart run build_runner watch -d
+---------------------
+Riverpod+Freezed+Json INIT
+---------------------
+flutter pub add flutter_riverpod
+flutter pub add riverpod_annotation
+flutter pub add dev:custom_lint
+flutter pub add dev:riverpod_generator
+flutter pub add dev:riverpod_lint
+flutter pub add freezed_annotation
+flutter pub add dev:freezed
+flutter pub add json_annotation
+flutter pub add dev:json_serializable
+flutter pub add dev:build_runner
+
+analysis_options.yaml
+linter:
+  rules:
+    avoid_print: false
+analyzer:
+  errors:
+    invalid_annotation_target: ignore // only for json_serializable
+  plugins:
+    - custom_lint
+  exclude:
+    - '**/*.freezed.dart'
+    - '**/*.g.dart'
+	
+dart run build_runnder build --delete-conflicting-outputs
+dart run build_runner watch -d (this is same as the one above)
 -------------
 Riverpod INIT
 -------------
@@ -103,33 +131,6 @@ analyzer:
   exclude:
     - '**/*.g.dart'
 	
-dart run build_runner watch -d
----------------------
-Riverpod+Freezed+Json INIT
----------------------
-flutter pub add flutter_riverpod
-flutter pub add riverpod_annotation
-flutter pub add dev:custom_lint
-flutter pub add dev:riverpod_generator
-flutter pub add dev:riverpod_lint
-flutter pub add freezed_annotation
-flutter pub add dev:freezed
-flutter pub add json_annotation
-flutter pub add dev:json_serializable
-flutter pub add dev:build_runner
-
-analysis_options.yaml
-linter:
-  rules:
-    avoid_print: false
-analyzer:
-  errors:
-    invalid_annotation_target: ignore // only for json_serializable
-  exclude:
-    - '**/*.freezed.dart'
-    - '**/*.g.dart'
-	
-dart run build_runnder build --delete-conflicting-outputs
 dart run build_runner watch -d
 ------------------
 FLUTTER APPRENTICE
@@ -170,9 +171,9 @@ flutter run
 flutter packages get
 
 flutter pub add/remove [package]
-flutter clean
+flutter clean ; flutter pub get
 flutter pub get
-flutter pub upgrade --major-versions
+flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; code .
 flutter pub pub cache repair
 
 cd android
@@ -221,3 +222,24 @@ bool get isIOS => !kIsWeb && Platform.isIOS;
 bool get isLinux => !kIsWeb && Platform.isLinux;
 bool get isMacOS => !kIsWeb && Platform.isMacOS;
 bool get isWindows => !kIsWeb && Platform.isWindows;
+
+---------
+FIREBASE
+--------
+firebase --version
+flutterfire --version
+firebase login:list (firebase login)
+
+flutterfire configure
+
+flutter pub add firebase_core
+flutter pub add firebase_auth
+flutter pub add cloud_firestore
+flutterfire configure
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
