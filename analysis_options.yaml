@@ -8,3 +8,6 @@ analyzer:
     - custom_lint
   exclude:
     - '**/*.g.dart'
+custom_lint:
+  rules:
+    - missing_provider_scope: false
