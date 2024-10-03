@@ -4,6 +4,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'asyncvalue.g.dart';
 
+void main() {
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
 // proof that even NotifierProvider can produce AsyncValue
 @riverpod
 class Notif extends _$Notif {
@@ -33,12 +41,4 @@ class MyApp extends ConsumerWidget {
     print(test2);
     return Container();
   }
-}
-
-void main() {
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
 }
