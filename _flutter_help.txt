@@ -1,3 +1,6 @@
+Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; cd..}
+Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter analyze ; cd..}
+
 --------
 RIVERPOD
 --------
@@ -101,8 +104,9 @@ analyzer:
     - '**/*.freezed.dart'
     - '**/*.g.dart'
 	
-dart run build_runnder build --delete-conflicting-outputs
-dart run build_runner watch -d (this is same as the one above)
+dart run build_runner build --delete-conflicting-outputs
+dart run build_runner build -d (this is same as the one above)
+dart run build_runner watch -d
 -------------
 Riverpod INIT
 -------------
@@ -132,33 +136,6 @@ analyzer:
     - '**/*.g.dart'
 	
 dart run build_runner watch -d
-------------------
-FLUTTER APPRENTICE
-------------------
-107: final textTheme = Theme.of(context).textTheme.apply(displayColor:Theme.of(context).colorScheme.onSurface);
-IndexedStack with Bottomnav:
-      body: IndexedStack(
-        index: tab,
-        children: pages,
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: tab,
-        onDestinationSelected: (index) {
-          setState(() {
-            tab = index;
-          });
-        },
-        destinations: appBarDestinations, // List<NavigationDestination> (icon/label/selecctedIcon)
-      ),
-	  
-Listview shrinkWrap, primary, NeverScrollableScrollPhysics
-CustomScrollView: eg collapse your navigation header on scroll
-PageView: scrolls page by page
-SliverAppBar (flexiblespace: FlexibleSpaceBar(background: Center(child: Stack)))
-SliverToBoxAdapter
-GridView.builder (gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: columns))
-Stack (fit: StackFit.expand)
-flutter_secure_storage plugin instead of shared prefs
 
 --------------
 INITIALIZATION
@@ -174,6 +151,8 @@ flutter pub add/remove [package]
 flutter clean ; flutter pub get
 flutter pub get
 flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; code .
+Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; cd..}
+Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter analyze ; cd..}
 flutter pub pub cache repair
 
 cd android
@@ -191,10 +170,10 @@ flutter:
  - assets/example.json // use AssetBundle object
  
 dependencies:
- flutter:
- sdk: flutter
- cupertino_icons: ^1.0.2
- google_fonts: 2.2.0
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:  // https://docs.flutter.dev/ui/navigation/url-strategies
+    sdk: flutter
 
 debugShowMaterialGrid: false,
 debugShowCheckedModeBanner: false
@@ -243,3 +222,66 @@ import 'firebase_options.dart';
 await Firebase.initializeApp(
   options: DefaultFirebaseOptions.currentPlatform,
 );
+
+------------------
+FLUTTER APPRENTICE
+------------------
+107: final textTheme = Theme.of(context).textTheme.apply(displayColor:Theme.of(context).colorScheme.onSurface);
+IndexedStack with Bottomnav:
+      body: IndexedStack(
+        index: tab,
+        children: pages,
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: tab,
+        onDestinationSelected: (index) {
+          setState(() {
+            tab = index;
+          });
+        },
+        destinations: appBarDestinations, // List<NavigationDestination> (icon/label/selecctedIcon)
+      ),
+	  
+Listview shrinkWrap, primary, NeverScrollableScrollPhysics
+CustomScrollView: eg collapse your navigation header on scroll
+PageView: scrolls page by page
+SliverAppBar (flexiblespace: FlexibleSpaceBar(background: Center(child: Stack)))
+SliverToBoxAdapter
+GridView.builder (gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: columns))
+Stack (fit: StackFit.expand)
+flutter_secure_storage plugin instead of shared prefs
+
+------------
+URL STRATEGY
+------------
+  flutter_web_plugins:
+    sdk: flutter
+
+import 'package:flutter_web_plugins/url_strategy.dart';
+ 
+void main() {
+  usePathUrlStrategy();
+  runApp(ExampleApp());
+}
+
+------
+ref.on
+------
+void printInfo(Ref ref, String providerName) {
+  print('$providerName initialized');
+  ref.onAddListener(() {
+    print('$providerName listener added');
+  });
+  ref.onCancel(() {
+    print('$providerName canceled');
+  });
+  ref.onResume(() {
+    print('$providerName resumed');
+  });
+  ref.onRemoveListener(() {
+    print('$providerName listener removed');
+  });
+  ref.onDispose(() {
+    print('$providerName disposed');
+  });
+}
