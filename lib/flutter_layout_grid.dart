@@ -28,16 +28,16 @@ class DesktopLayout extends StatelessWidget {
       color: Colors.grey[400],
       child: LayoutGrid(
         areas: '''
-          header header  header
-          nav    content aside
-          nav    content .
-          footer footer  footer
-        ''',
+          header header   header
+          nav    content  .
+          nav    content  aside
+          footer footer   footer
+        ''', // . will show empty grey space
         // A number of extension methods are provided for concise track sizing
         columnSizes: [152.px, 1.fr, 152.px],
         rowSizes: [
           112.px,
-          auto,
+          auto, // this is 0px because 1.fr takes up all the remaining space
           1.fr,
           64.px,
         ],
@@ -71,7 +71,7 @@ class Content extends StatelessWidget {
   const Content({super.key});
 
   @override
-  Widget build(BuildContext context) => Container(color: Colors.grey[300]);
+  Widget build(BuildContext context) => Container(color: Colors.white);
 }
 
 class Aside extends StatelessWidget {
@@ -79,7 +79,7 @@ class Aside extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Container(color: Colors.grey[600], width: 184);
+      Container(color: Colors.yellow, width: 184);
 }
 
 class Footer extends StatelessWidget {
