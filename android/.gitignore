@@ -5,12 +5,6 @@ gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
-
-lib/_practice1.dart
-lib/_practice2.dart
-lib/_practice3.dart
-lib/_practice4.dart
-
 # Remember to never publicly share your keystore.
 # See https://flutter.dev/to/reference-keystore
 key.properties
