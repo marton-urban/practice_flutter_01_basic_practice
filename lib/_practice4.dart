@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const ExampleProvider(child: MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,54 +12,72 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Provider Demo"),
+          title: const Text('flutter_simple_chat'),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(context.watch<int>().toString()),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => context.read<ExampleProviderState>().increment(),
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
+        body: Column(
+          children: [
+            MessageBubble(
+              text: "How was the concert?",
+              isCurrentUser: false,
+            ),
+            MessageBubble(
+              text:
+                  "Awesome! Next time you gotta come as well! Awesome! Next time you gotta come as well!",
+              isCurrentUser: true,
+            ),
+            MessageBubble(
+              text: "Ok, when is the next date?",
+              isCurrentUser: false,
+            ),
+            MessageBubble(
+              text: "They're playing on the 20th of November",
+              isCurrentUser: true,
+            ),
+            MessageBubble(
+              text: "Let's do it!",
+              isCurrentUser: false,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class ExampleProvider extends StatefulWidget {
-  const ExampleProvider({super.key, required this.child});
+class MessageBubble extends StatelessWidget {
+  const MessageBubble({
+    super.key,
+    required this.text,
+    required this.isCurrentUser,
+  });
 
-  final Widget child;
-
-  @override
-  ExampleProviderState createState() => ExampleProviderState();
-}
-
-class ExampleProviderState extends State<ExampleProvider> {
-  int _count = 0;
-
-  void increment() {
-    setState(() {
-      _count++;
-    });
-  }
+  final String text;
+  final bool isCurrentUser;
 
   @override
   Widget build(BuildContext context) {
-    return Provider<int>.value(
-      value: _count,
-      child: Provider.value(
-        value: this,
-        child: widget.child,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: Row(
+        children: [
+          if (isCurrentUser) Spacer(),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: isCurrentUser ? Colors.blue : Colors.grey,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                text,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: isCurrentUser ? Colors.white : Colors.black87,
+                    ),
+              ),
+            ),
+          ),
+          if (!isCurrentUser) Spacer(),
+        ],
       ),
     );
   }

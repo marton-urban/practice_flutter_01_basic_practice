@@ -1,5 +1,13 @@
-Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; cd..}
+MULTIPLE FOLDERS:
+Get-ChildItem -Directory | foreach {cd $_.FullName ; rm -r -fo android; rm -r -fo windows ; rm -r -fo linux ; rm -r -fo web ; rm -r -fo macos ; rm -r -fo ios ; flutter create . --platforms=android,windows,linux,web,macos,ios ; Remove-Item test/widget_test.dart ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; Get-ChildItem * -Include *.g.dart -Recurse | Remove-Item ; Get-ChildItem * -Include *.freezed.dart -Recurse | Remove-Item ; dart run build_runner build -d ; cd..}
+
 Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter analyze ; cd..}
+
+SINGLE FOLDER:
+
+rm -r -fo android; rm -r -fo windows ; rm -r -fo linux ; rm -r -fo web ; rm -r -fo macos ; rm -r -fo ios ; flutter create . --platforms=android,windows,linux,web,macos,ios ; Remove-Item test/widget_test.dart ; cd android ; ./gradlew wrapper --gradle-version 8.4 ; ./gradlew wrapper --version ; cd.. ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; Get-ChildItem * -Include *.g.dart -Recurse | Remove-Item ; Get-ChildItem * -Include *.freezed.dart -Recurse | Remove-Item ; dart run build_runner build -d
+
+dart run build_runner build -d
 
 --------
 RIVERPOD
@@ -20,6 +28,17 @@ riverpodKeepAlive
 String familyHello(FamilyHelloRef ref, String name) => return 'Hello $name';  // don't use name
 
 riverpodFuture/riverpodStream
+
+@Riverpod(keepAlive: true)
+int cartItemsCount(Ref ref) {
+  return ref.watch(cartProvider).maybeMap(
+        data: (cart) => cart.value.items.length,
+        orElse: () => 0,
+      );
+}
+
+doc: guard and overrideWith
+use if (_mounted) like in leave_review_controller.dart (video 161)
 -------
 FREEZED
 -------
@@ -140,7 +159,7 @@ dart run build_runner watch -d
 --------------
 INITIALIZATION
 --------------
-pub: Shimmer, RxDart
+pub: Shimmer (if you don't want multiple loading indicators? flutter foundations video44), RxDart
 vscode ext: Dart Data Class Generator (copyWith, toString, equality etc. - vscode settings: use Equatable)
 
 flutter create // --template=module/package/plugin/skeleton --platforms=web,android,ios
@@ -151,7 +170,9 @@ flutter pub add/remove [package]
 flutter clean ; flutter pub get
 flutter pub get
 flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; code .
-Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; cd..}
+
+Get-ChildItem -Directory | foreach {cd $_.FullName ; rm -r -fo android; rm -r -fo windows ; rm -r -fo linux ; rm -r -fo web ; rm -r -fo macos ; rm -r -fo ios ; flutter create . --platforms=android,windows,linux,web,macos,ios ; Remove-Item test/widget_test.dart ; flutter pub upgrade --major-versions  --tighten ; flutter clean ; flutter pub get ; Get-ChildItem * -Include *.g.dart -Recurse | Remove-Item ; Get-ChildItem * -Include *.freezed.dart -Recurse | Remove-Item ; dart run build_runner build -d ; cd..}
+
 Get-ChildItem -Directory | foreach {cd $_.FullName ; flutter analyze ; cd..}
 flutter pub pub cache repair
 
@@ -183,7 +204,8 @@ OTHERS
 ------
 SingleChildScrollView to prevent Overflow error (?)
 RichText>>TextSpan
-Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly)
+
+cloc --by-file .
 
 ------------------
 PLATFORMS SPECIFIC
@@ -285,3 +307,106 @@ void printInfo(Ref ref, String providerName) {
     print('$providerName disposed');
   });
 }
+
+------
+Chrome
+------
+Remove C:\flutter\bin\cache\flutter_tools.stamp
+C:\flutter\packages\flutter_tools\lib\src\web\chrome.dart
+Under '--disable-extensions' add:
+'--disable-web-security'
+
+------
+GRADLE
+------
+flutter config --jdk-dir='C:\Program Files\Android\Android Studio\jbr'
+(so Flutter will use Android Studio's built-in JDK which is probably the best solution even if it's not the latest JDK)
+
+Java version check: flutter doctor --v
+https://docs.gradle.org/current/userguide/compatibility.html#java
+<PROJECT>/android/gradle/wrapper/gradle-wrapper.properties
+
+In cmd <PROJECT>/android/ folder:
+./gradlew --version
+./gradlew wrapper --gradle-version 8.4
+
+-------------------
+DEFENDER EXCEPTIONS
+-------------------
+Programming Folder/Android/Vscode/Flutter/Java
+C:\Users\urban\.gradle
+C:\Users\urban\AppData\Local\Android\Sdk
+C:\Users\urban\AppData\Local\Google\AndroidStudio
+
+-------
+TESTING
+-------
+flutter pub add dev:mocktail
+
+Github Actions (video90): https://blog.gskinner.com/archives/2022/01/flutter-easily-add-ci-testing-with-github-actions.html
+final isFake = String.fromEnvironment('useFakeRepos') == 'true';
+Run the app with: --dart-define=useFakeRepos=true
+
+flutte test --coverage
+gitignore: coverage/lcov.info
+Flutter Coverage
+Coverage Gutteres
+
+UNIT TESTS:
+expect/expectLater (emits/emitsInOrder)
+
+when thenReturn(object) / thenAnswer(future,stream) / thenThrow(exception)
+verify().called(1)
+verifyNever()
+
+timeout: const Timeout(Duration(milliseconds: 500)) or first line: @Timeout(Duration(milliseconds: 500))
+
+WIDGET TESTS:
+find.text() / find.byType() / find.byKey()
+.evaluate();
+findsOneWidget/findsNWidgets(kTestProduts.length))
+
+await tester.pushWidget();
+await tester.enterText(emailField, email);
+
+const kDialogDefaultKey = Key('dialog-default-key');
+find.byKey(kDialogDefaultKey);
+Or inside a class:
+static const emailKey = Key('email');
+find.byKey(ClassName.emailKey);
+
+when Future.delayed() => Wrap your code with await tester.runAsync(() async {
+)}
+
+INTEGRATION TESTS:
+dev_dependencies:
+  integration_test:
+    sdk: flutter  
+
+await tester.pumpAndSettle();
+
+  Future<void> openPopupMenu() async {
+    final finder = find.byType(MoreMenuButton);
+    final matches = finder.evaluate();
+    // if an item is found, it means that we're running
+    // on a small window and can tap to reveal the menu
+    if (matches.isNotEmpty) {
+      await tester.tap(finder);
+      await tester.pumpAndSettle();
+    }
+    // else no-op, as the items are already visible
+  }
+  
+GOLDEN IMAGE TESTS:
+  fonts:
+    # Used for Golden Image tests
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+
+golden_robot.dart
+
+flutter test --update-goldens --tags=golden (if you use tags, add them to dart_test.yaml)
+.gitignore:
+# don't check in golden failure output
+**/failures/*.png
