@@ -314,7 +314,7 @@ Chrome
 Remove C:\flutter\bin\cache\flutter_tools.stamp
 C:\flutter\packages\flutter_tools\lib\src\web\chrome.dart
 Under '--disable-extensions' add:
-'--disable-web-security'
+'--disable-web-security',
 
 ------
 GRADLE
