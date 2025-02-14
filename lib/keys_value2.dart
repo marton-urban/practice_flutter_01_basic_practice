@@ -15,6 +15,8 @@ class User {
 }
 
 class AdvancedKeyPage extends StatefulWidget {
+  const AdvancedKeyPage({super.key});
+
   @override
   createState() => _AdvancedKeyPageState();
 }

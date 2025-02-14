@@ -8,6 +8,8 @@ void main() {
 }
 
 class UniqueKeyPage extends StatefulWidget {
+  const UniqueKeyPage({super.key});
+
   @override
   createState() => _UniqueKeyPageState();
 }

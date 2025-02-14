@@ -9,6 +9,8 @@ class BasicKeyPage extends StatelessWidget {
   // global key preconditions: stateful widget + state class is public
   final keyCounter = GlobalKey<_CounterWidgetState>();
 
+  BasicKeyPage({super.key});
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         home: Scaffold(

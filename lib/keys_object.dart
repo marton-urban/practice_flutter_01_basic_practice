@@ -8,6 +8,8 @@ void main() {
 }
 
 class SameValuesPage extends StatefulWidget {
+  const SameValuesPage({super.key});
+
   @override
   createState() => _SameValuesPageState();
 }

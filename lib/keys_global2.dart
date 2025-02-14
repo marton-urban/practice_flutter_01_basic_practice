@@ -5,6 +5,8 @@ void main() {
 }
 
 class FormKeyPage extends StatefulWidget {
+  const FormKeyPage({super.key});
+
   @override
   createState() => _FormKeyPageState();
 }

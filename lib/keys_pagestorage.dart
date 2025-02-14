@@ -14,6 +14,8 @@ Future main() async {
 class MyApp extends StatelessWidget {
   static const String title = 'Page Storage Key';
 
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   createState() => _MainPageState();
 }
@@ -174,6 +178,8 @@ class ButtonWidget extends StatelessWidget {
 }
 
 class ListViewPageStorageKeyPage extends StatefulWidget {
+  const ListViewPageStorageKeyPage({super.key});
+
   @override
   createState() => _ListViewPageStorageKeyPageState();
 }
@@ -246,6 +252,8 @@ class _ListViewPageStorageKeyPageState
 }
 
 class GridViewPageStorageKeyPage extends StatefulWidget {
+  const GridViewPageStorageKeyPage({super.key});
+
   @override
   createState() => _GridViewPageStorageKeyPageState();
 }
@@ -336,6 +344,8 @@ class _GridViewPageStorageKeyPageState
 }
 
 class ExpansionPageStorageKeyPage extends StatelessWidget {
+  const ExpansionPageStorageKeyPage({super.key});
+
   @override
   Widget build(BuildContext context) => DefaultTabController(
         length: 2,
@@ -376,6 +386,8 @@ class ExpansionPageStorageKeyPage extends StatelessWidget {
 final bucketGlobal = PageStorageBucket();
 
 class PersistPageStoragePage extends StatefulWidget {
+  const PersistPageStoragePage({super.key});
+
   @override
   createState() => _PersistPageStoragePageState();
 }

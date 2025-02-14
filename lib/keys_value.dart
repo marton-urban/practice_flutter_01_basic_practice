@@ -7,6 +7,8 @@ void main() {
 }
 
 class BasicKeyPage extends StatefulWidget {
+  const BasicKeyPage({super.key});
+
   @override
   createState() => _BasicKeyPageState();
 }
